@@ -1,4 +1,13 @@
 ---
+haproxy_installation_default_options:
+  - log global
+  - option  httplog
+  - option  tcplog
+  - option  dontlognull
+  - timeout connect 5000
+  - timeout client 50000
+  - timeout server 50000
+
 haproxy_installation_frontends:
   - { name: k8s-api, binds: "*:8443", mode: tcp, backend: k8s-api }
 
@@ -19,7 +28,6 @@ haproxy_installation_keepalived_check_interval: "2"
 haproxy_installation_keepalived_check_timeout: "3"
 haproxy_installation_keepalived_check_weight: "-50"
 #
-# Suggested changes (24-04-2025):
 # haproxy_installation_keepalived_token: "" # Mandatory
 # haproxy_installation_keepalived_unicast_peers: "" # Optional
 # haproxy_installation_keepalived_notify_master: "" # Optional
